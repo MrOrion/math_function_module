@@ -52,7 +52,11 @@ class TestRobotModule : public RobotModule {
   AxisData **getAxis(unsigned int *count_axis);
   void *writePC(unsigned int *buffer_length);
 
+#if MODULE_API_VERSION == 102
+  virtual int init(initCallback_t& initCallback) override;
+#else
   int init();
+#endif
   void final();
 
 #if MODULE_API_VERSION > 100

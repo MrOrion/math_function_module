@@ -120,7 +120,12 @@ void *TestRobotModule::writePC(unsigned int *buffer_length) {
   return NULL;
 }
 
-int TestRobotModule::init() {
+#if MODULE_API_VERSION == 102
+  int TestRobotModule::init(initCallback_t& initCallback)
+#else
+  int TestRobotModule::init()
+#endif
+{
   for (unsigned int i = 0; i < COUNT_ROBOTS; ++i) {
     aviable_connections.push_back(new TestRobot(i + 1));
   }
